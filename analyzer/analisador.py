@@ -61,23 +61,31 @@ def lexer(input_string):
         elif char == '=':
             tokens.append(('EQUAL', char))
             index += 1
+        elif input_string[index:index+2] == '\\\\':
+            while index < length and input_string[index] != '\n':
+                index += 1   
         else:
             tokens.append(('UNKNOWN', char))  # Token para caracteres desconhecidos
-        index += 1
+            index += 1
+         
+
 
     return tokens
 
 def process_input(input_data):
-    # Remover comentários da entrada
-    input_data = re.sub(r'\\.*', '', input_data)
-
+    # Remover comentários da entrada apenas para exibição 
+    expression = re.sub(r'\\.*', '', input_data)
     # Encontrar a expressão da entrada (ignorando comentários)
-    expression = ""
-    lines = input_data.split('\n')
-    for line in lines:
-        expression += line
+
+    # expression = input_data
+
+    #expression = ""
+    #lines = input_data.split('\n')
+    #for line in lines:
+    #  expression += line
 
     # Remover espaços em branco extras
     expression = expression.strip()
 
     return expression, lexer(input_data)
+

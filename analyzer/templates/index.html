@@ -1,139 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-    <style>
-        body {
-            background: linear-gradient(to bottom right, #3498db, #8e44ad); /* Substitua 'background.jpg' pelo caminho da sua imagem de fundo */
-            background-size:cover;
-            backdrop-filter: blur(10px); 
-            font-family: Arial, sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: auto;
-            min-height: 100vh;
-            color:#fff
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            width: 60%;
-            height: auto;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            
-        }
-        .input-result{
-            margin: 10px;
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 10px 10px 10px;
-            height: auto;           
-        }
-        .analysis-container{
-            width: 40%; 
-        }
-        .select-div{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .instructions-container {
-            font-size: small;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #ffffff;
-        }
-
-        
-        .input_div{
-            display: inline-block;
-            width: 50%;
-        }
-        .input-container {
-            display: inline-block;
-            justify-content: center;
-            align-items: center;
-            margin-top: 50px;
-            width: 100%;
-        }
-
-        .select-file {
-            cursor: pointer;
-            text-decoration: none;
-            font-size: small;
-            background-color: #fff;
-            /*text-transform: uppercase;*/
-            letter-spacing: 1px;
-            color: #8e44ad;
-            
-            padding: 10px 20px;
-            overflow: hidden;
-            border-radius: 5px;
-            transition: color 1s;
-        }
-
-        .select-file:hover{
-            color: aqua;
-            border: 2px solid aqua;
-        }
-
-        .select-file input[type="file"] {
-            display: none;
-        }
-
-        .custom-upload {
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 5px;
-            color: #ffffff;
-            cursor: pointer;
-        }
-
-        .analysis-container {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            border-radius: 5px;
-            height: auto;
-            backdrop-filter: blur(10px);
-        }
-
-        .analysis-container h3 {
-            color: #ffffff;
-        }
-
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 5px;
-            color: #ffffff;
-            cursor: pointer;
-        }
-
-    </style>
-
+    <title>Lex Analyzer</title>
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'analyzer/icon.png'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'analyzer/style.css'%}">
 </head>
 <body>
     <div class="container">
@@ -180,10 +51,11 @@
                         </a>
                         <span id="file-name"></span>
                     </div>
+
+                    <span>ou</span>
                     
                     <div class="input-container">
-                        <label for="manual-expression">Inserir Expressão Manualmente:</label>
-                        <textarea id="manual-expression" name="manual_expression"></textarea>
+                        <textarea placeholder="Inserir expressão" id="manual-expression" name="manual_expression"></textarea>
                     </div>
         
                     <button id="analyze-button" type="submit">Analisar</button>
@@ -260,6 +132,13 @@
                     toggleButton.textContent = 'Mostrar Instruções';
                 }
             });
+
+            const textarea = document.querySelector("textarea");
+            textarea.addEventListener("keyup", e => {
+                textarea.style.height = "35px";
+                let scHeight = e.target.scrollHeight;
+                textarea.style.height = `${scHeight}px`
+            })
         </script>
         
 </body>
