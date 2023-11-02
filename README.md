@@ -1,4 +1,4 @@
-# lex_analyzer
+# Analisador Léxico
 
 [abraao1989.pythonanywhere.com/analyzer/index/](abraao1989.pythonanywhere.com/analyzer/index/)
 
