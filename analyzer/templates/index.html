@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
-    <title>Lex Analyzer</title>
+    <title>Lexical Analyzer</title>
     {% load static %}
     <link rel="icon" type="image/png" href="{% static 'analyzer/icon.png'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'analyzer/style.css'%}">
 </head>
 <body>
+    <div class="sidebutton">
+ 
+        <a href="https://github.com/pauloabraao/lex_analyzer" target="_blank">
+            <img src="{% static 'analyzer/github.png'%}">
+        </a> 
+
+    </div>
     <div class="container">
         <h1>Analisador Léxico</h1>
 
@@ -40,7 +47,7 @@
             <div class="input_div">
                
     
-                <form method="post" action="{% url 'analisar' %}" enctype="multipart/form-data">
+                <form method="post" action="{% url 'result' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="select-div">
                         <a class="select-file">
@@ -62,34 +69,40 @@
                 </form>
 
             </div>
-        
-           
+            
             
             <div class="analysis-container">
+            {% if error_message %}
+            <div class="error-message">
+                {{ error_message }}
+            </div>
+
+            {% else %}
                 {% if expression %}
-                <h3>Expressão Analisada:</h3>
-                <p>{{ expression }}</p>
+                    <h3>Expressão Analisada:</h3>
+                    <p>{{ expression }}</p>
                 {% endif %}
-    
+            
                 {% if tokens %}
-                <h3>Tabela de Tokens:</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Lexeme</th>
-                            <th>Token</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for token in tokens %}
-                        <tr>
-                            <td>{{ token.1 }}</td>
-                            <td>{{ token.0 }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                    <h3>Tabela de Tokens:</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Lexeme</th>
+                                <th>Token</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for token in tokens %}
+                                <tr>
+                                    <td>{{ token.1 }}</td>
+                                    <td>{{ token.0 }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 {% endif %}
+            {% endif %}
             </div>
             
         </div>
